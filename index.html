@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Для тебя ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="hearts-bg"></div>
+
+  <!-- Экран 1: Welcome -->
+  <section id="screen1" class="screen active">
+    <div class="card welcome-card">
+      <div class="welcome-emoji">💖</div>
+      <h1>Привет, родная моя</h1>
+      <p class="subtitle">Я сделал это специально для тебя!</p>
+      <p class="small-text">Пройди мини игру, в конце будет что то интересненькое</p>
+      <button class="btn" onclick="goToScreen(2)">Начать игру</button>
+    </div>
+  </section>
+
+  <!-- Экран 2: Почему я тебя люблю -->
+  <section id="screen2" class="screen">
+    <div class="screen-content">
+      <h1>Почему я тебя люблю (и это лишь малая часть причин), я тебя люблю за то, что ты есть у меня, за просто так</h1>
+      <p class="subtitle">Нажми на карточки, чтобы прочитать причины</p>
+
+      <div class="reasons-list">
+        <div class="reason-card" onclick="toggleReason(this)">
+          <div class="reason-header">
+            <span class="reason-emoji">🫂</span>
+            <span class="reason-title">Твоя преданность</span>
+            <span class="reason-arrow">▾</span>
+          </div>
+          <div class="reason-body">Ты всегда меня поддерживаешь и всегдя рядом со мной, моя главная опора во всех вслеленных, я чувствую то, как сильно ты меня любишь</div>
+        </div>
+
+        <div class="reason-card" onclick="toggleReason(this)">
+          <div class="reason-header">
+            <span class="reason-emoji">🌸</span>
+            <span class="reason-title">Твоя нежность</span>
+            <span class="reason-arrow">▾</span>
+          </div>
+          <div class="reason-body">Ты даришь мне свою любовь каждый божий день и я безумно нуждаюсь в ней, мне всегда тебя нехватает. Я просто таю в твоих обьятиях каждый раз, я счастлив с тобой, кошечка моя</div>
+        </div>
+
+        <div class="reason-card" onclick="toggleReason(this)">
+          <div class="reason-header">
+            <span class="reason-emoji">😍</span>
+            <span class="reason-title">Твой характер</span>
+            <span class="reason-arrow">▾</span>
+          </div>
+          <div class="reason-body">Он мной просто обожаем, я его люблю просто безумно сильно, какая бы ты не была, злой, грустной, веселой, я тебя обожаю любой абсолютно и ты мне желанная любой и всегда</div>
+        </div>
+
+        <div class="reason-card" onclick="toggleReason(this)">
+          <div class="reason-header">
+            <span class="reason-emoji">✨</span>
+            <span class="reason-title">Твоя красота</span>
+            <span class="reason-arrow">▾</span>
+          </div>
+          <div class="reason-body">Ты идеальна для меня всегда и везде, ты просто принцесса моей жизни, моя феечка винкс, моя девочка, моя кошечка, ты шикарна и просто прекрасна</div>
+        </div>
+
+        <div class="reason-card" onclick="toggleReason(this)">
+          <div class="reason-header">
+            <span class="reason-emoji">❤️</span>
+            <span class="reason-title">Твоё сердце</span>
+            <span class="reason-arrow">▾</span>
+          </div>
+          <div class="reason-body">Каждый раз когда мы обнимаемся, и я прикосаюсь головой к твоей груди, я слышу твое сердце, и мне становится спокойно и легко на душе, пропадает абсолютно все, я утопаю полностью в товей любви в этих моментах. И для нас создается отдельный мир, в которым только мы. Я тебя люблю безумно сильно 😭😭😭</div>
+        </div>
+
+        <div class="reason-card" onclick="toggleReason(this)">
+          <div class="reason-header">
+            <span class="reason-emoji">🫀</span>
+            <span class="reason-title">Наше будущее</span>
+            <span class="reason-arrow">▾</span>
+          </div>
+          <div class="reason-body">Не люблю загадывать, что будет потом, когда то... Но знай, что я хочу и буду с тобой навсегда просто forever, только с тобой</div>
+        </div>
+      </div>
+
+      <button class="btn" onclick="goToScreen(3)">Далее</button>
+    </div>
+  </section>
+
+  <!-- Экран 3: Memory Game -->
+  <section id="screen3" class="screen">
+    <div class="screen-content">
+      <h1>Давай сыграем</h1>
+      <p class="subtitle">Найди все пары!</p>
+      <div class="moves-counter">Ходы: <span id="movesCount">0</span></div>
+
+      <div id="gameBoard" class="game-board"></div>
+
+      <div id="gameComplete" class="game-complete" style="display:none;">
+        <p class="win-text">Ты прошла игру 💖</p>
+        <button class="btn" onclick="goToScreen(4)">Далее</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Экран 4: Воспоминания + Финал -->
+  <section id="screen4" class="screen">
+    <div class="screen-content">
+      <h1>Наши воспоминания</h1>
+      <p class="subtitle">Моменты, которые я храню в сердце 💞 (и это лишь малая часть их)</p>
+
+      <!--
+        ============================================
+        ВАРИАНТ Б (прямо в HTML):
+        Замени src="img/m1.jpg" на путь к своему фото.
+        Замени текст "Воспоминание 1" на свою подпись.
+        ============================================
+      -->
+      <div id="memoriesGrid" class="memories-grid">
+        <div class="memory-card">
+          <div class="memory-photo">
+            <img src="img/m1.jpg" alt="Воспоминание 1">
+          </div>
+          <p class="memory-caption">а помнишь Наш день 25.10.2025</p>
+        </div>
+        <div class="memory-card">
+          <div class="memory-photo">
+            <img src="img/m2.jpg" alt="Воспоминание 2">
+          </div>
+          <p class="memory-caption">А помнишь, наш первый поцелуй совместный на камеру</p>
+        </div>
+        <div class="memory-card">
+          <div class="memory-photo">
+            <img src="img/m3.jpg" alt="Воспоминание 3">
+          </div>
+          <p class="memory-caption">А помнишь, как мы тогда немного поругались, но все равно встретились на несколько минут и были безумно рады этому</p>
+        </div>
+        <div class="memory-card">
+          <div class="memory-photo">
+            <img src="img/m4.jpg" alt="Воспоминание 4">
+          </div>
+          <p class="memory-caption">А помнишь, как мы просто смеялись в этой беседке, что просто уссаться можно</p>
+        </div>
+        <div class="memory-card">
+          <div class="memory-photo">
+            <img src="img/m5.jpg" alt="Воспоминание 5">
+          </div>
+          <p class="memory-caption">А помнишь, как мы праздновали мое день рождение</p>
+        </div>
+        <div class="memory-card">
+          <div class="memory-photo">
+            <img src="img/m6.jpg" alt="Воспоминание 6">
+          </div>
+          <p class="memory-caption">А помнишь, как я первый раз у тебя был весь день, тогда еще к тебе бабушка приехала, но ты до нее меня расцеловала всего</p>
+        </div>
+      </div>
+
+      <button class="btn" id="openGreetingBtn" onclick="showGreeting()">Открыть</button>
+
+      <!-- Финальное поздравление -->
+      <div id="greeting" class="greeting-modal" style="display:none;">
+        <div class="greeting-card">
+          <div class="greeting-emoji">🎉</div>
+          <h2>Счастье мое</h2>
+          <p class="greeting-text">
+            Ты изменила мою всю жизнь. Каждый день рядом с тобой это самый дорогой подврок для меня.
+            Спасибо за тебя, просто огромное спасибо, что есть есть у меня, за все абсолютно, что ты делаешь для меня, за то, что ты всегдя рядом🫂🥹🫀
+            Вместе на всегда только с тобой
+          </p>
+          <p class="greeting-love">Я тебя люблю бесконечно сильно 💗</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

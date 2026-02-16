@@ -1,0 +1,501 @@
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: -apple-system, "SF Pro Display", "Inter", "Segoe UI", Arial, sans-serif;
+  background: #fff7fb;
+  color: #333;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== Floating Hearts Background ===== */
+#hearts-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -40px;
+  opacity: 0;
+  animation: floatUp linear forwards;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg) scale(0.5);
+  }
+  10% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-110vh) rotate(360deg) scale(1);
+  }
+}
+
+/* ===== Screens ===== */
+.screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(30px);
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  overflow-y: auto;
+  padding: 20px 16px;
+}
+
+.screen.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.screen-content {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 40px;
+}
+
+/* ===== Typography ===== */
+h1 {
+  font-size: 26px;
+  font-weight: 800;
+  text-align: center;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 800;
+  text-align: center;
+  color: #1a1a2e;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #888;
+  text-align: center;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.small-text {
+  font-size: 13px;
+  color: #aaa;
+  text-align: center;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 40px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #ff4d8d, #ff2d6d);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 24px rgba(255, 45, 109, 0.35);
+  letter-spacing: 0.3px;
+  -webkit-appearance: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 45, 109, 0.45);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 4px 16px rgba(255, 45, 109, 0.3);
+}
+
+/* ===== Screen 1: Welcome ===== */
+.welcome-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 48px 32px 40px;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
+  max-width: 400px;
+  width: 100%;
+}
+
+.welcome-emoji {
+  font-size: 64px;
+  margin-bottom: 20px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* ===== Screen 2: Reasons ===== */
+.reasons-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.reason-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.25s ease;
+}
+
+.reason-card:hover {
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.08);
+}
+
+.reason-header {
+  display: flex;
+  align-items: center;
+  padding: 18px 20px;
+  gap: 14px;
+}
+
+.reason-emoji {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.reason-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a2e;
+  flex: 1;
+}
+
+.reason-arrow {
+  font-size: 22px;
+  color: #ccc;
+  transition: transform 0.35s ease, color 0.35s ease;
+  flex-shrink: 0;
+}
+
+.reason-card.open .reason-arrow {
+  transform: rotate(180deg);
+  color: #ff4d8d;
+}
+
+.reason-body {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  font-size: 14px;
+  color: #777;
+  line-height: 1.6;
+  transition: max-height 0.4s ease, opacity 0.35s ease, padding 0.4s ease;
+}
+
+.reason-card.open .reason-body {
+  opacity: 1;
+  padding: 0 20px 18px;
+}
+
+/* ===== Screen 3: Memory Game ===== */
+.moves-counter {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ff4d8d;
+  background: #fff;
+  padding: 8px 24px;
+  border-radius: 50px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 340px;
+  margin-bottom: 24px;
+}
+
+.game-card {
+  aspect-ratio: 1;
+  perspective: 600px;
+  cursor: pointer;
+}
+
+.game-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+.game-card.flipped .game-card-inner {
+  transform: rotateY(180deg);
+}
+
+.game-card-front,
+.game-card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.game-card-front {
+  background: #fff;
+  box-shadow: 0 3px 16px rgba(0, 0, 0, 0.06);
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffb3cc;
+  border: 2px solid #ffe6f0;
+}
+
+.game-card-back {
+  background: linear-gradient(135deg, #ffe6f0, #ffd6e8);
+  transform: rotateY(180deg);
+  font-size: 30px;
+  box-shadow: 0 3px 16px rgba(255, 77, 141, 0.15);
+}
+
+.game-card.matched .game-card-back {
+  background: linear-gradient(135deg, #d4ffed, #b8f5d8);
+  box-shadow: 0 3px 16px rgba(0, 200, 100, 0.15);
+}
+
+.game-complete {
+  text-align: center;
+}
+
+.win-text {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ff4d8d;
+  margin-bottom: 16px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ===== Screen 4: Memories ===== */
+.memories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  width: 100%;
+  margin-bottom: 28px;
+}
+
+.memory-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease;
+}
+
+.memory-card:hover {
+  transform: translateY(-3px);
+}
+
+.memory-photo {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffd6e8, #ffb3d1);
+}
+
+.memory-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.memory-caption {
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  text-align: center;
+}
+
+/* ===== Greeting Modal ===== */
+.greeting-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeInOverlay 0.4s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.greeting-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 40px 28px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: slideUpCard 0.5s ease;
+}
+
+@keyframes slideUpCard {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.greeting-emoji {
+  font-size: 56px;
+  margin-bottom: 16px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.greeting-text {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.greeting-love {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ff4d8d;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ===== Scroll styling for screen-content ===== */
+#screen2, #screen3, #screen4 {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: 60px;
+}
+
+#screen2 .screen-content,
+#screen3 .screen-content,
+#screen4 .screen-content {
+  margin: 0 auto;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 22px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .welcome-card {
+    padding: 36px 24px 32px;
+  }
+
+  .welcome-emoji {
+    font-size: 52px;
+  }
+
+  .btn {
+    padding: 14px 32px;
+    font-size: 15px;
+  }
+
+  .game-board {
+    gap: 8px;
+    max-width: 300px;
+  }
+
+  .game-card-back {
+    font-size: 24px;
+  }
+
+  .game-card-front {
+    font-size: 20px;
+  }
+
+  .greeting-card {
+    padding: 32px 22px;
+  }
+}
+
+@media (max-width: 360px) {
+  .game-board {
+    gap: 6px;
+    max-width: 270px;
+  }
+
+  .game-card-back {
+    font-size: 20px;
+  }
+
+  .memories-grid {
+    gap: 10px;
+  }
+}
